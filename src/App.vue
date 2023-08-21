@@ -11,24 +11,31 @@ export default {
     data() {
         return {
             projects: [],
+            pages: [],
         }
     },
     methods: {
+        loadPage(target) {
+            if (target == null) return;
+            this.loadProjects(target);
+        },
         loadProjects(target) {
             axios.get(target)
                 .then(response => {
 
-                    const data = response.data;
+                    const data = response.data.projects;
                     console.log(data);
 
-                    this.projects = data.projects;
+                    this.projects = data.data;
+                    this.pages = data.links;
 
                     console.log(this.projects);
+                    console.log(this.pages);
                 })
                 .catch(error => {
                     console.log(error);
                 });
-        }
+        },
     },
     mounted() {
         this.loadProjects('http://127.0.0.1:8000/api/v1/project-index');
@@ -37,7 +44,7 @@ export default {
 </script>
 
 <template>
-    <ProjectCard :details="this.projects" />
+    <ProjectCard :projects="this.projects" :pages="this.pages" @cambiaPagina="loadPage" />
 </template>
 
 <style lang="scss">
