@@ -1,12 +1,12 @@
 <script>
 import { store } from './store.js'
 import axios from 'axios'
-import AppHelloWorld from './components/AppHelloWorld.vue'
+import ProjectCard from './components/ProjectCard.vue'
 
 
 export default {
     components: {
-        AppHelloWorld,
+        ProjectCard,
     },
     data() {
         return {
@@ -21,8 +21,9 @@ export default {
                     const data = response.data;
                     console.log(data);
 
-                    this.projects = data.projects.data;
-                    this.pages = data.projects.links;
+                    this.projects = data.projects;
+
+                    console.log(this.projects);
                 })
                 .catch(error => {
                     console.log(error);
@@ -36,7 +37,7 @@ export default {
 </script>
 
 <template>
-    <AppHelloWorld />
+    <ProjectCard :details="this.projects" />
 </template>
 
 <style lang="scss">
