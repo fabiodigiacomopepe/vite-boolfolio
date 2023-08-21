@@ -5,25 +5,38 @@ import AppHelloWorld from './components/AppHelloWorld.vue'
 
 
 export default {
-  components: {
-    AppHelloWorld,
-  },
-  data() {
-    return {
-      store
-    }
-  },
-  methods: {
+    components: {
+        AppHelloWorld,
+    },
+    data() {
+        return {
+            projects: [],
+        }
+    },
+    methods: {
+        loadProjects(target) {
+            axios.get(target)
+                .then(response => {
 
-  },
-  created() {
+                    const data = response.data;
+                    console.log(data);
 
-  }
+                    this.projects = data.projects.data;
+                    this.pages = data.projects.links;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
+    },
+    mounted() {
+        this.loadProjects('http://127.0.0.1:8000/api/v1/project-index');
+    },
 }
 </script>
 
 <template>
-  <AppHelloWorld />
+    <AppHelloWorld />
 </template>
 
 <style lang="scss">
