@@ -30,6 +30,7 @@ export default {
         <div>Framework: {{ project.framework }}</div>
         <div>Versione: {{ project.versione }}</div>
         <div>Deployato: {{ (project.deployato == 1) ? 'Sì' : 'No' }}</div>
+        <div>Tipo: {{ project.type['nome'] }}</div>
     </div>
 </template>
 
