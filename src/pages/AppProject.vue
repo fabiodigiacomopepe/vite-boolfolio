@@ -1,6 +1,6 @@
 <script>
 export default {
-    name: "ProjectCard",
+    name: "AppProject",
     props: {
         projects: Object,
         pages: Object
@@ -13,7 +13,9 @@ export default {
         <h1>Progetti</h1>
         <ul>
             <li v-for="(project, index) in projects" :key="index">
-                [{{ project.id }}] {{ project.nome }}
+                <router-link :to="{ name: 'project-detail', params: { id: project.id } }">
+                    [{{ project.id }}] {{ project.nome }}
+                </router-link>
             </li>
         </ul>
 
