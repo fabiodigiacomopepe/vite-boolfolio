@@ -16,6 +16,7 @@ export default {
         axios.get(this.path_url + '/project-detail/' + projectId)
             .then(response => {
                 this.project = response.data.project;
+                console.log(this.project, 'INFO');
             }).catch(error => {
                 console.error(error);
             });
@@ -26,6 +27,9 @@ export default {
 <template>
     <div class="container">
         <h1>{{ project.nome }}</h1>
+        <div>Framework: {{ project.framework }}</div>
+        <div>Versione: {{ project.versione }}</div>
+        <div>Deployato: {{ (project.deployato == 1) ? 'Sì' : 'No' }}</div>
     </div>
 </template>
 
